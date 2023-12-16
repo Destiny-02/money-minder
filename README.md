@@ -1,7 +1,7 @@
 # Budgeting Project 
 A web app and mobile app to help with my personal budgeting needs.
 
-<img width="960" alt="web_summary" src="https://github.com/Destiny-02/budgeting-app/assets/78716153/e93b1adf-f075-4e7a-b52e-bcb5adbc524a">
+<img width="960" alt="web_summary" src="https://github.com/Destiny-02/budgeting-app/assets/78716153/aa47b17a-d5b0-416a-82af-a9d7f2e8d70d">
 
 ## Features
 - Sign in with Google and link the app to a Google Sheet containing your bank transactions.
