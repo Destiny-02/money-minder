@@ -1,0 +1,53 @@
+# Built application files
+*.apk
+*.ap_
+
+# Compiled Kotlin files
+*.class
+
+# Generated files
+build/
+captures/
+
+# Gradle-specific
+.gradle/
+build/
+.idea/
+
+# Local configuration file (sdk path, etc.)
+local.properties
+
+# Proguard files
+proguard/
+
+# Log files
+*.log
+
+# Android Studio files
+*.iml
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/gradle.xml
+.idea/assetWizardSettings.xml
+.idea/dictionaries
+.idea/libraries
+.idea/caches
+.idea/modules.xml
+.idea/navigation.xml
+.idea/assetWizardSettings.xml
+
+# Keystore files
+*.jks
+*.keystore
+
+# External native build folder generated in Android Studio 2.2 and later
+.externalNativeBuild
+
+# Google Services (e.g. google-services.json)
+google-services.json
+
+# Secrets (e.g. web_client_id)
+secrets.xml
+
+# Crashlytics
+crashlytics.properties
