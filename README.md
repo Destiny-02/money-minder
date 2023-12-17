@@ -9,8 +9,6 @@ A web app and companion Android app for categorising bank transactions and monit
 - View a summary of your income and expenses for the past month, or a custom time period.
 - Support for both dark mode and light mode!
 
-Note: the mobile app is only available for Android devices.  
-
 ## Documentation
 [Spreadsheet Format](https://docs.google.com/document/d/1UWql0gntXs781yd3M3EMSsdCJHGfpmZq4U7UGSUPGRs)
 
