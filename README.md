@@ -1,4 +1,4 @@
-# Budgeting Project 
+# Money Minder 
 A web app and mobile app to help with my personal budgeting needs.
 
 <img width="960" alt="web_summary" src="https://github.com/Destiny-02/budgeting-app/assets/78716153/aa47b17a-d5b0-416a-82af-a9d7f2e8d70d">

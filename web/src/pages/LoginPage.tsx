@@ -43,7 +43,7 @@ const LoginPage: React.FC = () => {
         <Container size="xs" p="lg">
           <Stack align="center">
             <Image src="/logo.png" alt="Logo" width={50} height={50} />
-            <Text align="center">Welcome to Budgeting App</Text>
+            <Text align="center">Welcome to Money Minder</Text>
             <Text align="center">Log in with your Google account to continue.</Text>
             {/* To avoid white background issue in dark mode */}
             <div style={{ colorScheme: "light" }}>

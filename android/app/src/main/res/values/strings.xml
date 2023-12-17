@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Budgeting App</string>
+    <string name="app_name">Money Minder</string>
     <string name="action_refresh">Refresh</string>
     <string name="action_logout">Logout</string>
     <string name="categories_tab_heading">Categories</string>

@@ -85,7 +85,7 @@ const MainLayout: React.FC = () => {
               <Burger opened={opened} onClick={() => setOpened((o) => !o)} size="sm" color={theme.colors.gray[6]} mr="xl" />
             </MediaQuery>
             <MediaQuery smallerThan="md" styles={{ display: "none" }}>
-              <Text>Budgeting App</Text>
+              <Text>Money Minder</Text>
             </MediaQuery>
             <div style={{ marginLeft: "auto" }}>
               <Flex gap="sm" align="center">
