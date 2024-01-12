@@ -28,6 +28,7 @@ dependencies {
 	implementation ("com.google.apis:google-api-services-drive:v3-rev20230212-2.0.0")
 	implementation("com.google.http-client:google-http-client-gson:1.43.1")
 	implementation("com.google.http-client:google-http-client-jackson:1.29.2")
+	implementation("io.github.cdimascio:dotenv-kotlin:6.4.1")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 

@@ -38,3 +38,4 @@ out/
 
 ### Keys ###
 client_secret.json
+.env

@@ -15,7 +15,6 @@
     <string name="previous">Previous</string>
     <string name="sheet_id_next_button">View Stats</string>
     <string name="sheet_id_edit_text_hint">Your Google Sheet ID</string>
-    <string name="service_email">service-account@budgeting-app-389210.iam.gserviceaccount.com</string>
     <string name="google_sheet_id_instructions">Please share your Google Sheet with edit permissions with the email address below. Please ensure that your Google Sheet is in the right <a href="https://docs.google.com/document/d/1UWql0gntXs781yd3M3EMSsdCJHGfpmZq4U7UGSUPGRs/edit?usp=drive_link">format</a>.</string>
     <string name="tc_statement">I agree with the <a href="https://docs.google.com/document/d/1Vpe1hawi9dAVAXlHiQF5KIEhsWiuXczrY8oTN-XN1o0/edit?usp=drive_link">Terms Of Use</a></string>
     <string name="preference_file_key">budgeting_app_preferences</string>

@@ -26,7 +26,7 @@ const SheetPage: React.FC = () => {
   const [notification, setNotification] = useState<string | null>(null);
   const [showNotification, setShowNotification] = useState(false);
   const { token } = useAuth();
-  const serviceAccountEmail = "service-account@budgeting-app-389210.iam.gserviceaccount.com";
+  const serviceAccountEmail = import.meta.env.VITE_SERVICE_ACCOUNT ?? "";
 
   const handleViewStatsClick = async () => {
     setError(null);

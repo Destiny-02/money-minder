@@ -7,12 +7,13 @@ import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport
 import com.google.api.client.json.jackson.JacksonFactory
 import com.google.api.services.drive.DriveScopes
 import com.google.api.services.sheets.v4.SheetsScopes
+import io.github.cdimascio.dotenv.dotenv
 import java.util.Collections
 
 class TokenUtil {
     companion object {
-        private const val WEB_CLIENT_ID = "344607355066-d8qof5lqcv92k24igpb9pra3cqsh8ili.apps.googleusercontent.com"
-
+        private val dotenv = dotenv()
+        private val WEB_CLIENT_ID = dotenv["WEB_CLIENT_ID"]
         fun getCredentials(): GoogleCredential {
             return GoogleCredential.fromStream(
                 this::class.java.classLoader.getResourceAsStream("client_secret.json")
