@@ -116,7 +116,7 @@ const SummaryPage: React.FC = () => {
           </Center>
         </Stack>
       </Center>
-      {error && (
+      {!isLoading && error && (
         <div style={{ width: "50%" }}>
           <Space h="lg" />
           <ErrorMessage message={error ?? ""} />
