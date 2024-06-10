@@ -22,15 +22,15 @@ const LineChart: React.FC<Props> = ({ categorySummaries }) => {
 
   // Dimensions
   const isMobile = useMediaQuery("(max-width: 62em)"); // md
-  const pieWidth = isMobile ? 250 : 400;
+  const chartWidth = isMobile ? 250 : 400;
   const legendWidth = 150;
-  const pieLegendGap = isMobile ? 25 : 50;
+  const chartLegendGap = isMobile ? 25 : 50;
   let mt = 50;
   let mb = mt;
   let ml = 115;
   let mr = ml + legendWidth;
-  let width = pieWidth + ml + mr + pieLegendGap;
-  let height = pieWidth + mt + mb;
+  let width = chartWidth + ml + mr + chartLegendGap;
+  let height = chartWidth + mt + mb;
 
   // Portait narrow phone screens e.g. iPhone SE
   const smallScreen = useMediaQuery("(max-width: 48em)"); // sm
@@ -67,6 +67,9 @@ const LineChart: React.FC<Props> = ({ categorySummaries }) => {
         }}
         yFormat={
           (value) => typeof value === 'number' ? `$${value.toFixed(2)}` : value.toString()
+        }
+        yScale={
+          {min: 'auto', max: 'auto', type: 'linear', reverse: true}
         }
         enableSlices="x"
         margin={{ top: mt, right: mr, bottom: mb, left: ml }}

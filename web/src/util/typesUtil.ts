@@ -26,15 +26,11 @@ export function categorySummariesToLineEntries(categorySummaries: CategorySummar
   for (const categorySummary of categorySummaries) {
     categorySummary.monthValues = categorySummary.monthValues.sort((a, b) => dateToNumber(a.month) - dateToNumber(b.month));
 
-    if (categorySummary.monthValues.every((monthValue) => monthValue.value === 0)) {
-      continue;
-    }
-
     const lineEntry: LineEntry = {
       id: categorySummary.classification.category,
       data: categorySummary.monthValues.map((monthValue) => ({
         x: dateToMonthYear(monthValue.month),
-        y: monthValue.value,
+        y: Math.round(monthValue.value * 100) / 100,
       })),
     }
 

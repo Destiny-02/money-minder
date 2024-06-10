@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { Container, Title, Flex, Space, Loader, Center, Stack, Group, Button } from "@mantine/core";
+import { Container, Title, Flex, Space, Loader, Center, Stack, Group, Button, MultiSelect } from "@mantine/core";
 import { DatePickerInput } from "@mantine/dates";
 // @ts-ignore
 import fetchData from "../util/fetchData";
@@ -24,6 +24,8 @@ const TrendPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [categorySummaries, setCategorySummaries] = useState<CategorySummary[]>([]);
+  const [categories, setCategories] = useState<string[]>([]);
+  const [categorySummariesInChart, setCategorySummariesInChart] = useState<CategorySummary[]>([]);
   const [dateRange, setDateRange] = useState<[Date, Date]>(getDatesThisMonth());
 
   // Load data once on page load
@@ -40,7 +42,10 @@ const TrendPage: React.FC = () => {
       setError("Error loading transactions summary.");
     } else {
       setError(null);
-      setCategorySummaries(data as CategorySummary[]);
+      const categorySummariesData = (data as CategorySummary[]).filter((categorySummary: CategorySummary) => categorySummary.classification.category !== "Excluded" && categorySummary.classification.category !== "Uncoded");
+      setCategorySummaries(categorySummariesData);
+      setCategorySummariesInChart((categorySummariesData).slice(0, 5));
+      setCategories((categorySummariesData).map((categorySummary: CategorySummary) => categorySummary.classification.category));
     }
     setIsLoading(false);
   }
@@ -85,10 +90,22 @@ const TrendPage: React.FC = () => {
         </div>
       )}
       <Space h="lg" />
-      <Title order={2}>Categories</Title>
       <Flex align="center" direction="column" gap="md">
         {isLoading && <Loader />}
-        {!isLoading && categorySummaries.length !== 0 && <LineChart categorySummaries={categorySummaries} />}
+        {!isLoading && categorySummaries.length !== 0 && 
+          <Flex align="center" direction="column" gap="sm">
+            <MultiSelect 
+              data={categories} defaultValue={categories.slice(0, 5)} 
+              label="Categories" placeholder="Categories" style={{ width: "80%" }}
+              maxDropdownHeight={160}
+              searchable={true}
+              onChange={(value) => {
+                setCategorySummariesInChart(categorySummaries.filter((categorySummary: CategorySummary) => value.includes(categorySummary.classification.category)));
+              }}
+            />
+            <LineChart categorySummaries={categorySummariesInChart} />
+          </Flex>
+        }
         {!isLoading && categorySummaries.length === 0 && <ErrorMessage message="No transactions found." />}
       </Flex>
       <Space h="lg" />
