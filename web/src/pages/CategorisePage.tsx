@@ -66,7 +66,7 @@ const CategorisePage: React.FC = () => {
 
           cTransac.push({
             ...transaction,
-            classification: matchingFilter ? matchingFilter.category : "",
+            category: matchingFilter ? matchingFilter.category : "",
           } as CategorisedTransaction);
         }
         setCategorisedTransactions(cTransac);
@@ -133,10 +133,10 @@ const CategorisePage: React.FC = () => {
               <tbody>
                 {categorisedTransactions.map((ct) => (
                   // Assume no duplicate transactions
-                  <tr key={ct.date + ct.amount + ct.classification + ct.description}>
+                  <tr key={ct.date + ct.amount + ct.category + ct.description}>
                     <td>{ct.date}</td>
                     <td>{ct.amount}</td>
-                    <td>{ct.classification}</td>
+                    <td>{ct.category}</td>
                     <td>{ct.description}</td>
                   </tr>
                 ))}

@@ -29,4 +29,4 @@ export type UnCategorisedTransaction = {
   description: string;
 };
 
-export type CategorisedTransaction = UnCategorisedTransaction & { classification: string };
+export type CategorisedTransaction = UnCategorisedTransaction & { category: string };
