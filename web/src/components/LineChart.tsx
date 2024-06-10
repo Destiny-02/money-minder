@@ -1,25 +1,20 @@
-import { PieEntry, PieType, SummaryItem } from "../util/types";
-import { summaryItemsToCategoriesPieEntries, summaryItemsToTypesPieEntries, makePieEntriesNonNegative } from "../util/typesUtil";
-import { ResponsivePie } from "@nivo/pie";
+import { LineEntry, CategorySummary } from "../util/types";
+import { categorySummariesToLineEntries } from "../util/typesUtil";
+import { ResponsiveLine } from '@nivo/line'
 import { interpolateColors } from "../util/colorUtil";
 import { useMediaQuery } from "@mantine/hooks";
 import { useMantineColorScheme, useMantineTheme } from "@mantine/core";
 
 interface Props {
-  summaryItems: SummaryItem[];
-  checked: boolean;
-  pieType: PieType;
+  categorySummaries: CategorySummary[];
 }
 
-const PieChart: React.FC<Props> = ({ summaryItems, checked, pieType }) => {
-  const pieData: PieEntry[] =
-    pieType == "Categories"
-      ? makePieEntriesNonNegative(summaryItemsToCategoriesPieEntries(summaryItems, checked))
-      : makePieEntriesNonNegative(summaryItemsToTypesPieEntries(summaryItems, checked));
+const LineChart: React.FC<Props> = ({ categorySummaries }) => {
+  const lineData: LineEntry[] =  categorySummariesToLineEntries(categorySummaries);
 
   // Colors
   const theme = useMantineTheme();
-  const colors = interpolateColors("#006B5D", "#E2DFFF", pieData.length);
+  const colors = interpolateColors("#006B5D", "#E2DFFF", lineData.length);
   const { colorScheme } = useMantineColorScheme();
   const dark = colorScheme === "dark";
   const textColor = theme.colors[dark ? "dark" : "gray"][dark ? 0 : 9];
@@ -27,30 +22,30 @@ const PieChart: React.FC<Props> = ({ summaryItems, checked, pieType }) => {
 
   // Dimensions
   const isMobile = useMediaQuery("(max-width: 62em)"); // md
-  const pieWidth = isMobile ? 250 : 400;
+  const chartWidth = isMobile ? 300 : 400;
   const legendWidth = 150;
-  const pieLegendGap = isMobile ? 25 : 50;
+  const chartLegendGap = isMobile ? 25 : 50;
   let mt = 50;
   let mb = mt;
-  let ml = 115;
+  let ml = 50;
   let mr = ml + legendWidth;
-  let width = pieWidth + ml + mr + pieLegendGap;
-  let height = pieWidth + mt + mb;
+  let width = chartWidth + ml + mr + chartLegendGap;
+  let height = chartWidth + mt + mb;
 
   // Portait narrow phone screens e.g. iPhone SE
   const smallScreen = useMediaQuery("(max-width: 48em)"); // sm
   if (smallScreen) {
-    width = 250;
+    width = 300;
     height = 300;
-    mt = 0;
-    mb = 0;
-    ml = 0;
-    mr = 0;
+    mt = 10;
+    mb = 10;
+    ml = 10;
+    mr = 10;
   }
 
   return (
     <div style={{ height: height, width: width }}>
-      <ResponsivePie
+      <ResponsiveLine
         theme={{
           text: {
             fill: textColor,
@@ -64,17 +59,25 @@ const PieChart: React.FC<Props> = ({ summaryItems, checked, pieType }) => {
           },
         }}
         colors={colors}
-        activeOuterRadiusOffset={smallScreen ? 0 : 8}
         animate
-        data={pieData}
-        valueFormat={(value) =>
-          // format the value as a currency e.g. $1.23
-          `$${value.toFixed(2)}`
+        useMesh
+        data={lineData}
+        axisLeft={
+          smallScreen ? null : {
+            format: (value) => `$${value}`,
+          }
         }
+        axisBottom={
+          smallScreen ? null : {}
+        }
+        yFormat={
+          (value) => typeof value === 'number' ? `$${value.toFixed(2)}` : value.toString()
+        }
+        yScale={
+          {min: 'auto', max: 'auto', type: 'linear', reverse: true}
+        }
+        enableSlices="x"
         margin={{ top: mt, right: mr, bottom: mb, left: ml }}
-        arcLinkLabelsSkipAngle={10}
-        enableArcLinkLabels={!smallScreen}
-        arcLabelsSkipAngle={20}
         legends={
           smallScreen
             ? []
@@ -100,4 +103,4 @@ const PieChart: React.FC<Props> = ({ summaryItems, checked, pieType }) => {
   );
 };
 
-export default PieChart;
+export default LineChart;

@@ -6,6 +6,7 @@ import { RequiresAuth, RequiresNonAuth } from "./util/Auth";
 import LoginPage from "./pages/LoginPage";
 import SheetPage from "./pages/SheetPage";
 import SummaryPage from "./pages/SummaryPage";
+import TrendPage from "./pages/TrendPage";
 import { AppRoutes } from "./util/routes";
 import FiltersPage from "./pages/FiltersPage";
 import CategorisePage from "./pages/CategorisePage";
@@ -27,6 +28,7 @@ export default function App() {
         <Route index element={<SheetPage />} />
         <Route path={AppRoutes.SHEET_SELECT} element={<SheetPage />} />
         <Route path={AppRoutes.TRANSACTIONS_SUMMARY} element={<SummaryPage />} />
+        <Route path={AppRoutes.TREND} element={<TrendPage />} />
         <Route path={AppRoutes.MY_FILTERS} element={<FiltersPage />} />
         <Route path={AppRoutes.CATEGORISE_TOOL} element={<CategorisePage />} />
       </Route>

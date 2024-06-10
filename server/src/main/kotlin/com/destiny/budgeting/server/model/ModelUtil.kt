@@ -116,13 +116,12 @@ class ModelUtil {
             val months = mutableListOf<LocalDate>()
 
             var currMonth = firstDay
-            while (currMonth.isBefore(lastDay) || currMonth.isAfter(lastDay)) {
+            while (!currMonth.isAfter(lastDay)) {
                 months.add(currMonth)
                 currMonth = currMonth.plusMonths(1)
             }
 
             return months
-
         }
 
         fun String.toLocalDate(): LocalDate {

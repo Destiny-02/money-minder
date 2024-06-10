@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { AppShell, Navbar, Header, Text, NavLink, MediaQuery, Burger, useMantineTheme, Flex } from "@mantine/core";
 import { useState } from "react";
-import { IconChartPie2, IconFileSpreadsheet, IconFilter, IconTool } from "@tabler/icons-react";
+import { IconChartPie2, IconFileSpreadsheet, IconFilter, IconTool, IconChartLine } from "@tabler/icons-react";
 import ActionToggle from "../components/ActionToggle";
 import ProfileMenu from "../components/ProfileMenu";
 import { AppRoutes, pageNames } from "../util/routes";
@@ -26,6 +26,12 @@ const MainLayout: React.FC = () => {
       label: pageNames[AppRoutes.TRANSACTIONS_SUMMARY],
       icon: <IconChartPie2 size="1.1rem" stroke={1.5} />,
       boldIcon: <IconChartPie2 size="1.1rem" stroke={2.5} />,
+    },
+    {
+      href: AppRoutes.TREND,
+      label: pageNames[AppRoutes.TREND],
+      icon: <IconChartLine size="1.1rem" stroke={1.5} />,
+      boldIcon: <IconChartLine size="1.1rem" stroke={2.5} />,
     },
     {
       href: AppRoutes.MY_FILTERS,
