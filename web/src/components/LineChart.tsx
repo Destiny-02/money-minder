@@ -22,12 +22,12 @@ const LineChart: React.FC<Props> = ({ categorySummaries }) => {
 
   // Dimensions
   const isMobile = useMediaQuery("(max-width: 62em)"); // md
-  const chartWidth = isMobile ? 250 : 400;
+  const chartWidth = isMobile ? 300 : 400;
   const legendWidth = 150;
   const chartLegendGap = isMobile ? 25 : 50;
   let mt = 50;
   let mb = mt;
-  let ml = 115;
+  let ml = 50;
   let mr = ml + legendWidth;
   let width = chartWidth + ml + mr + chartLegendGap;
   let height = chartWidth + mt + mb;
@@ -35,12 +35,12 @@ const LineChart: React.FC<Props> = ({ categorySummaries }) => {
   // Portait narrow phone screens e.g. iPhone SE
   const smallScreen = useMediaQuery("(max-width: 48em)"); // sm
   if (smallScreen) {
-    width = 250;
+    width = 300;
     height = 300;
-    mt = 0;
-    mb = 0;
-    ml = 0;
-    mr = 0;
+    mt = 10;
+    mb = 10;
+    ml = 10;
+    mr = 10;
   }
 
   return (
@@ -62,9 +62,14 @@ const LineChart: React.FC<Props> = ({ categorySummaries }) => {
         animate
         useMesh
         data={lineData}
-        axisLeft={{
-          format: (value) => `$${value}`,
-        }}
+        axisLeft={
+          smallScreen ? null : {
+            format: (value) => `$${value}`,
+          }
+        }
+        axisBottom={
+          smallScreen ? null : {}
+        }
         yFormat={
           (value) => typeof value === 'number' ? `$${value.toFixed(2)}` : value.toString()
         }
