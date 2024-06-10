@@ -7,6 +7,7 @@ A web app and companion Android app for categorising bank transactions and monit
 - Sign in with Google and link the app to a Google Sheet containing your bank transactions.
 - Automatically categorise your transactions by setting filters and uploading a CSV containing your raw bank transactions.
 - View a summary of your income and expenses for the past month, or a custom time period.
+- View the month-to-month trend of your income and expenses.
 - Support for both dark mode and light mode!
 
 ## Documentation
