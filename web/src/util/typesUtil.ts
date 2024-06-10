@@ -1,4 +1,4 @@
-import { SummaryItem, PieEntry, SummaryTypeItem, UnCategorisedTransaction } from "./types";
+import { SummaryItem, PieEntry, SummaryTypeItem, UnCategorisedTransaction, LineEntry, CategorySummary } from "./types";
 import Papa from "papaparse";
 
 export function summaryItemsToCategoriesPieEntries(summaryItems: SummaryItem[], showIncome: boolean, divideBy: number) {
@@ -18,6 +18,42 @@ export function summaryItemsToCategoriesPieEntries(summaryItems: SummaryItem[], 
     label: item.category,
     value: item.value,
   }));
+}
+
+export function categorySummariesToLineEntries(categorySummaries: CategorySummary[]) {
+  const lineEntries: LineEntry[] = [];
+
+  for (const categorySummary of categorySummaries) {
+    categorySummary.monthValues = categorySummary.monthValues.sort((a, b) => dateToNumber(a.month) - dateToNumber(b.month));
+
+    if (categorySummary.monthValues.every((monthValue) => monthValue.value === 0)) {
+      continue;
+    }
+
+    const lineEntry: LineEntry = {
+      id: categorySummary.classification.category,
+      data: categorySummary.monthValues.map((monthValue) => ({
+        x: dateToMonthYear(monthValue.month),
+        y: monthValue.value,
+      })),
+    }
+
+    lineEntries.push(lineEntry);
+  }
+
+  return lineEntries;
+}
+
+// Converts a date string in the format of dd/mm/yyyy to a number yyyymmdd
+function dateToNumber(date: string) {
+  const parts = date.split("/");
+  return parseInt(parts[2] + parts[1] + parts[0]);
+}
+
+// Converts a date string in the format of dd/mm/yyyy to a string in the format of mm/yyyy
+function dateToMonthYear(date: string) {
+  const parts = date.split("/");
+  return parts[1] + "/" + parts[2];
 }
 
 // Combines all the summary items with the same types
@@ -74,7 +110,7 @@ export function summaryItemsToTypesPieEntries(summaryItems: SummaryItem[], showS
   })).sort((a, b) => a.id.localeCompare(b.id));
 }
 
-export function makeNonNegative(pieEntries: PieEntry[]) {
+export function makePieEntriesNonNegative(pieEntries: PieEntry[]) {
   return pieEntries.map((entry) => ({
     ...entry,
     value: Math.abs(entry.value),

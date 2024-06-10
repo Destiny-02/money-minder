@@ -10,6 +10,28 @@ export type SummaryTypeItem = {
   value: number;
 };
 
+export type CategorySummary = {
+  classification: {
+    category: string;
+    type: string;
+    description: string;
+  };
+  monthValues: MonthValue[];
+};
+
+type MonthValue = {
+    month: string;
+    value: number;
+}
+
+export type CategoryValues = {
+  category: string;
+  values: {
+    date: string;
+    value: number;
+  }
+};
+
 export type Filter = {
   category: string;
   query: string;
@@ -19,6 +41,16 @@ export type PieEntry = {
   id: string;
   label: string;
   value: number;
+};
+
+export type LineEntry = {
+  id: string;
+  data: LinePoint[]
+}
+
+type LinePoint = {
+  x: string;
+  y: number;
 };
 
 export type PieType = "Categories" | "Types";

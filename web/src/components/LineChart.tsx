@@ -1,26 +1,20 @@
-import { PieEntry, PieType, SummaryItem } from "../util/types";
-import { summaryItemsToCategoriesPieEntries, summaryItemsToTypesPieEntries, makePieEntriesNonNegative } from "../util/typesUtil";
-import { ResponsivePie } from "@nivo/pie";
+import { LineEntry, CategorySummary } from "../util/types";
+import { categorySummariesToLineEntries } from "../util/typesUtil";
+import { ResponsiveLine } from '@nivo/line'
 import { interpolateColors } from "../util/colorUtil";
 import { useMediaQuery } from "@mantine/hooks";
 import { useMantineColorScheme, useMantineTheme } from "@mantine/core";
 
 interface Props {
-  summaryItems: SummaryItem[];
-  checked: boolean;
-  pieType: PieType;
-  divideBy: number;
+  categorySummaries: CategorySummary[];
 }
 
-const PieChart: React.FC<Props> = ({ summaryItems, checked, pieType, divideBy }) => {
-  const pieData: PieEntry[] =
-    pieType == "Categories"
-      ? makePieEntriesNonNegative(summaryItemsToCategoriesPieEntries(summaryItems, checked, divideBy))
-      : makePieEntriesNonNegative(summaryItemsToTypesPieEntries(summaryItems, checked, divideBy));
+const LineChart: React.FC<Props> = ({ categorySummaries }) => {
+  const lineData: LineEntry[] =  categorySummariesToLineEntries(categorySummaries);
 
   // Colors
   const theme = useMantineTheme();
-  const colors = interpolateColors("#006B5D", "#E2DFFF", pieData.length);
+  const colors = interpolateColors("#006B5D", "#E2DFFF", lineData.length);
   const { colorScheme } = useMantineColorScheme();
   const dark = colorScheme === "dark";
   const textColor = theme.colors[dark ? "dark" : "gray"][dark ? 0 : 9];
@@ -51,7 +45,7 @@ const PieChart: React.FC<Props> = ({ summaryItems, checked, pieType, divideBy })
 
   return (
     <div style={{ height: height, width: width }}>
-      <ResponsivePie
+      <ResponsiveLine
         theme={{
           text: {
             fill: textColor,
@@ -65,17 +59,17 @@ const PieChart: React.FC<Props> = ({ summaryItems, checked, pieType, divideBy })
           },
         }}
         colors={colors}
-        activeOuterRadiusOffset={smallScreen ? 0 : 8}
         animate
-        data={pieData}
-        valueFormat={(value) =>
-          // format the value as a currency e.g. $1.23
-          `$${value.toFixed(2)}`
+        useMesh
+        data={lineData}
+        axisLeft={{
+          format: (value) => `$${value}`,
+        }}
+        yFormat={
+          (value) => typeof value === 'number' ? `$${value.toFixed(2)}` : value.toString()
         }
+        enableSlices="x"
         margin={{ top: mt, right: mr, bottom: mb, left: ml }}
-        arcLinkLabelsSkipAngle={10}
-        enableArcLinkLabels={!smallScreen}
-        arcLabelsSkipAngle={20}
         legends={
           smallScreen
             ? []
@@ -101,4 +95,4 @@ const PieChart: React.FC<Props> = ({ summaryItems, checked, pieType, divideBy })
   );
 };
 
-export default PieChart;
+export default LineChart;
