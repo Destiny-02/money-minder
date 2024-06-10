@@ -9,14 +9,13 @@ interface Props {
   summaryItems: SummaryItem[];
   checked: boolean;
   pieType: PieType;
-  divideBy: number;
 }
 
-const PieChart: React.FC<Props> = ({ summaryItems, checked, pieType, divideBy }) => {
+const PieChart: React.FC<Props> = ({ summaryItems, checked, pieType }) => {
   const pieData: PieEntry[] =
     pieType == "Categories"
-      ? makePieEntriesNonNegative(summaryItemsToCategoriesPieEntries(summaryItems, checked, divideBy))
-      : makePieEntriesNonNegative(summaryItemsToTypesPieEntries(summaryItems, checked, divideBy));
+      ? makePieEntriesNonNegative(summaryItemsToCategoriesPieEntries(summaryItems, checked))
+      : makePieEntriesNonNegative(summaryItemsToTypesPieEntries(summaryItems, checked));
 
   // Colors
   const theme = useMantineTheme();

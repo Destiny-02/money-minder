@@ -126,7 +126,7 @@ const SummaryPage: React.FC = () => {
       <Title order={2}>Categories</Title>
       <Flex align="center" direction="column" gap="md">
         {isLoading && <Loader />}
-        {!isLoading && summaryItems.length !== 0 && <PieChart summaryItems={summaryItems} checked={showIncome} pieType={"Categories"} divideBy={1} />}
+        {!isLoading && summaryItems.length !== 0 && <PieChart summaryItems={summaryItems} checked={showIncome} pieType={"Categories"}/>}
         {!isLoading && summaryItems.length === 0 && <ErrorMessage message="No transactions found." />}
         <Switch label="Show income" onChange={(e) => setShowIncome(e.currentTarget.checked)} />
       </Flex>
@@ -134,7 +134,7 @@ const SummaryPage: React.FC = () => {
       <Title order={2}>Types</Title>
       <Flex align="center" direction="column" gap="md">
         {isLoading && <Loader />}
-        {!isLoading && summaryItems.length !== 0 && <PieChart summaryItems={summaryItems} checked={showSavings} pieType={"Types"} divideBy={1} />}
+        {!isLoading && summaryItems.length !== 0 && <PieChart summaryItems={summaryItems} checked={showSavings} pieType={"Types"}/>}
         {!isLoading && summaryItems.length === 0 && <ErrorMessage message="No transactions found." />}
         <Switch label="Show savings" onChange={(e) => setShowSavings(e.currentTarget.checked)} />
       </Flex>

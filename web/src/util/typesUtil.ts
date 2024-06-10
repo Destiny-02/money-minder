@@ -1,16 +1,9 @@
 import { SummaryItem, PieEntry, SummaryTypeItem, UnCategorisedTransaction, LineEntry, CategorySummary } from "./types";
 import Papa from "papaparse";
 
-export function summaryItemsToCategoriesPieEntries(summaryItems: SummaryItem[], showIncome: boolean, divideBy: number) {
+export function summaryItemsToCategoriesPieEntries(summaryItems: SummaryItem[], showIncome: boolean) {
   if (!showIncome) {
     summaryItems = summaryItems.filter((item) => item.category !== "Salary" && item.category !== "Other Income");
-  }
-
-  if (divideBy !== 1) {
-    summaryItems = summaryItems.map((item) => ({
-      ...item,
-      value: item.value / divideBy,
-    }));
   }
 
   return summaryItems.map((item) => ({
@@ -73,7 +66,7 @@ function summaryItemsToSummaryTypeItems(summaryItems: SummaryItem[]) {
   return summaryTypeItems;
 }
 
-export function summaryItemsToTypesPieEntries(summaryItems: SummaryItem[], showSavings: boolean, divideBy: number) {
+export function summaryItemsToTypesPieEntries(summaryItems: SummaryItem[], showSavings: boolean) {
   let summaryTypeItems = summaryItemsToSummaryTypeItems(summaryItems);
 
   // Replace Income with Savings
@@ -102,7 +95,7 @@ export function summaryItemsToTypesPieEntries(summaryItems: SummaryItem[], showS
   return summaryTypeItems.map((item) => ({
     id: item.type,
     label: item.type,
-    value: item.value / divideBy,
+    value: item.value,
   })).sort((a, b) => a.id.localeCompare(b.id));
 }
 
