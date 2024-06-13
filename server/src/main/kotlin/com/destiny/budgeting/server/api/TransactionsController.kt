@@ -66,7 +66,7 @@ class TransactionsController(private val googleSheetsService: GoogleSheetsServic
             // Read the sheet values
             val sheetValues: List<List<List<Any>>> = googleSheetsService.readSheetValues(sheetId, TokenUtil.getCredentials())
             val transactionValues = sheetValues.subList(0, sheetValues.size-2).flatten()
-            val transactions = SheetsUtil.getTransactions(transactionValues).filter { it.category != "Excluded" }
+            val transactions = SheetsUtil.getTransactions(transactionValues)
             val classificationValues: List<List<Any>> = sheetValues[sheetValues.size-2]
             val classifications = SheetsUtil.getClassifications(classificationValues)
 
@@ -74,7 +74,10 @@ class TransactionsController(private val googleSheetsService: GoogleSheetsServic
             val filteredTransactions = filterTransactionsByDate(transactions, startDate, endDate)
 
             // Generate the summary
-            val summaryItems = ModelUtil.transactionsToSummaryItems(filteredTransactions, classifications)
+            var summaryItems = ModelUtil.transactionsToSummaryItems(filteredTransactions, classifications)
+
+            // Remove summaryItems that are of type "Excluded"
+            summaryItems = summaryItems.filter { it.type != "Excluded" }
 
             ResponseEntity.ok(summaryItems)
         } catch (e: DateTimeParseException) {

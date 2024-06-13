@@ -42,7 +42,7 @@ const TrendPage: React.FC = () => {
       setError("Error loading transactions summary.");
     } else {
       setError(null);
-      const categorySummariesData = (data as CategorySummary[]).filter((categorySummary: CategorySummary) => categorySummary.classification.category !== "Excluded" && categorySummary.classification.category !== "Uncoded");
+      const categorySummariesData = data as CategorySummary[]
       setCategorySummaries(categorySummariesData);
       setCategorySummariesInChart((categorySummariesData).slice(0, 5));
       setCategories((categorySummariesData).map((categorySummary: CategorySummary) => categorySummary.classification.category));
