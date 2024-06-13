@@ -1,7 +1,7 @@
 # Money Minder 
 A web app and companion Android app for categorising bank transactions and monitoring expenses.
 
-<img width="960" alt="web_summary" src="https://github.com/Destiny-02/budgeting-app/assets/78716153/aa47b17a-d5b0-416a-82af-a9d7f2e8d70d">
+<img width="960" alt="web_summary" src="https://github.com/Destiny-02/money-minder/assets/78716153/93b0b760-2e92-4f69-a15f-061811a6855f">
 
 ## Features
 - Sign in with Google and link the app to a Google Sheet containing your bank transactions.
