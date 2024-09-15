@@ -4,7 +4,7 @@ import { DatePickerInput } from "@mantine/dates";
 // @ts-ignore
 import fetchData from "../util/fetchData";
 import { SummaryItem } from "../util/types";
-import { getDatesThisMonth, getDatesLast30Days, getDatesMonthlyAverage, formatDate } from "../util/dateUtil";
+import { getDatesThisMonth, getDatesLast30Days, formatDate } from "../util/dateUtil";
 // @ts-ignore
 import { useAuth } from "../util/Auth";
 // @ts-ignore
@@ -60,9 +60,6 @@ const SummaryPage: React.FC = () => {
       case "lastMonth":
         setDateRange(getDatesLast30Days());
         break;
-      case "monthlyAverage":
-        setDateRange(getDatesMonthlyAverage());
-        break;
       case "custom":
         setCustomSelected(true);
     }
@@ -80,7 +77,6 @@ const SummaryPage: React.FC = () => {
               data={[
                 { value: "thisMonth", label: "This month" },
                 { value: "lastMonth", label: "Last 30 days" },
-                { value: "monthlyAverage", label: "Monthly average (last 6 months)" },
                 { value: "custom", label: "Custom" },
               ]}
               defaultValue="thisMonth"
